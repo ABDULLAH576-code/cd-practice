@@ -13,5 +13,12 @@ jobs:
       - name: Get the code
         uses: actions/checkout@v4
 
-      - name: Show application
-        run: python3 app.py
+      - name: Connect to EC2
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            echo "Connected to EC2 successfully"
+            hostname
